@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Historic Fare Flights | New Heights Brewery</title>
+    <meta name="description" content="Non-trivial trivia nights at New Heights Brewery. Beer flights, locally-sourced bites, and fascinating history—all benefitting Fort Negley.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Source+Sans+3:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Warm Yellow Palette */
+            --gold-light: #FDF6E3;
+            --gold-cream: #F7EED3;
+            --gold-warm: #F4D35E;
+            --gold-deep: #E8B923;
+            --gold-amber: #C9960C;
+            
+            /* Complementary Warm Tones */
+            --brown-light: #8B7355;
+            --brown-warm: #5D4E37;
+            --brown-deep: #3D3224;
+            --brown-dark: #2A231A;
+            
+            /* Accent */
+            --rust: #B85C38;
+            --sage: #6B8F71;
+            --cream: #FFFEF9;
+            
+            /* Typography */
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body: 'Source Sans 3', -apple-system, sans-serif;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 6rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--gold-light);
+            color: var(--brown-deep);
+            line-height: 1.7;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        /* Texture Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* ============ NAVIGATION ============ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: var(--space-sm) var(--space-md);
+            background: linear-gradient(to bottom, var(--gold-light) 0%, transparent 100%);
+            transition: all 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(253, 246, 227, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(61, 50, 36, 0.1);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--brown-deep);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--gold-deep);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-md);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--brown-warm);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-deep);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--brown-deep);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--gold-warm);
+            color: var(--brown-deep) !important;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-deep) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(232, 185, 35, 0.4);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        /* Mobile Nav Toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--brown-deep);
+            transition: all 0.3s;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--space-xl) var(--space-md);
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(244, 211, 94, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(232, 185, 35, 0.2) 0%, transparent 50%),
+                var(--gold-light);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gold-cream);
+            border: 1px solid var(--gold-warm);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--brown-warm);
+            margin-bottom: var(--space-md);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold-amber);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--brown-dark);
+            margin-bottom: var(--space-sm);
+            letter-spacing: -0.02em;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero h1 span {
+            color: var(--gold-amber);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--brown-warm);
+            margin-bottom: var(--space-md);
+            font-weight: 400;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--brown-light);
+            max-width: 600px;
+            margin: 0 auto var(--space-md);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gold-warm);
+            color: var(--brown-deep);
+            box-shadow: 0 4px 20px rgba(244, 211, 94, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-deep);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(232, 185, 35, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--brown-warm);
+            border: 2px solid var(--brown-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--brown-deep);
+            color: var(--brown-deep);
+            background: rgba(93, 78, 55, 0.05);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: var(--space-md);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--brown-light);
+            font-size: 0.85rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .hero-scroll svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--brown-light);
+        }
+
+        /* ============ SECTIONS ============ */
+        section {
+            padding: var(--space-xl) var(--space-md);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto var(--space-lg);
+        }
+
+        .section-label {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold-amber);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--brown-dark);
+            line-height: 1.2;
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-description {
+            color: var(--brown-light);
+            font-size: 1.1rem;
+        }
+
+        /* ============ ABOUT / CONCEPT ============ */
+        .about {
+            background: var(--cream);
+        }
+
+        .about-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--brown-deep);
+            margin-bottom: var(--space-sm);
+        }
+
+        .about-content p {
+            margin-bottom: var(--space-sm);
+            color: var(--brown-warm);
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg, var(--gold-cream) 0%, var(--gold-light) 100%);
+            border-left: 4px solid var(--gold-deep);
+            padding: var(--space-md);
+            border-radius: 0 12px 12px 0;
+            margin: var(--space-md) 0;
+        }
+
+        .about-highlight p {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--brown-deep);
+            margin: 0;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-card {
+            background: var(--gold-light);
+            border-radius: 20px;
+            padding: var(--space-lg);
+            box-shadow: 0 20px 60px rgba(61, 50, 36, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--gold-warm), var(--gold-deep), var(--gold-amber));
+        }
+
+        .gaappp-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brown-deep);
+            margin-bottom: var(--space-sm);
+            text-align: center;
+        }
+
+        .gaappp-full {
+            font-size: 0.95rem;
+            color: var(--brown-light);
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .five-as {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .five-a-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--cream);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .five-a-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(61, 50, 36, 0.08);
+        }
+
+        .five-a-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gold-warm);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .five-a-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--brown-deep);
+        }
+
+        .five-a-content h4 {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            color: var(--brown-deep);
+            margin-bottom: 2px;
+        }
+
+        .five-a-content p {
+            font-size: 0.9rem;
+            color: var(--brown-light);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ============ WHAT YOU GET ============ */
+        .experience {
+            background: linear-gradient(180deg, var(--gold-cream) 0%, var(--gold-light) 100%);
+        }
+
+        .experience-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .experience-card {
+            background: var(--cream);
+            border-radius: 20px;
+            padding: var(--space-md);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(244, 211, 94, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(61, 50, 36, 0.12);
+        }
+
+        .experience-card:hover::before {
+            opacity: 1;
+        }
+
+        .experience-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-sm);
+            background: linear-gradient(135deg, var(--gold-warm) 0%, var(--gold-deep) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--brown-deep);
+        }
+
+        .experience-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--brown-deep);
+            margin-bottom: var(--space-xs);
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-card p {
+            font-size: 0.95rem;
+            color: var(--brown-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-highlight {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--gold-amber);
+        }
+
+        /* ============ EVENTS ============ */
+        .events {
+            background: var(--brown-dark);
+            color: var(--gold-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .events::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 10% 90%, rgba(244, 211, 94, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 10%, rgba(232, 185, 35, 0.05) 0%, transparent 50%);
+        }
+
+        .events .section-label {
+            color: var(--gold-warm);
+        }
+
+        .events .section-title {
+            color: var(--gold-light);
+        }
+
+        .events .section-description {
+            color: rgba(253, 246, 227, 0.7);
+        }
+
+        .events-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-card {
+            background: rgba(253, 246, 227, 0.05);
+            border: 1px solid rgba(244, 211, 94, 0.2);
+            border-radius: 20px;
+            padding: var(--space-md);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(244, 211, 94, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .event-card:hover {
+            border-color: var(--gold-warm);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .event-card:hover::before {
+            opacity: 1;
+        }
+
+        .event-number {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(244, 211, 94, 0.1);
+            line-height: 1;
+        }
+
+        .event-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gold-warm);
+            color: var(--brown-deep);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-date svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--brown-deep);
+        }
+
+        .event-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            margin-bottom: var(--space-xs);
+            position: relative;
+            z-index: 1;
+            line-height: 1.3;
+        }
+
+        .event-period {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--gold-warm);
+            font-size: 1rem;
+            margin-bottom: var(--space-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-card p {
+            color: rgba(253, 246, 227, 0.7);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+            margin-bottom: var(--space-sm);
+        }
+
+        .event-details {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            color: rgba(253, 246, 227, 0.6);
+        }
+
+        .event-detail svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--gold-warm);
+        }
+
+        /* ============ HOW IT WORKS ============ */
+        .how-it-works {
+            background: var(--cream);
+        }
+
+        .steps-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 70px;
+            bottom: -40px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--gold-warm), var(--gold-cream));
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold-warm) 0%, var(--gold-deep) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brown-deep);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 8px 25px rgba(244, 211, 94, 0.3);
+        }
+
+        .step-content {
+            padding-top: 0.5rem;
+        }
+
+        .step-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--brown-deep);
+            margin-bottom: var(--space-xs);
+        }
+
+        .step-content p {
+            color: var(--brown-light);
+            font-size: 1rem;
+        }
+
+        /* ============ PRICING ============ */
+        .pricing {
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-cream) 100%);
+        }
+
+        .pricing-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 30px;
+            padding: var(--space-lg);
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(61, 50, 36, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--gold-warm), var(--gold-deep), var(--gold-amber), var(--gold-deep), var(--gold-warm));
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: var(--gold-cream);
+            color: var(--gold-amber);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .pricing-amount {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--brown-deep);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+
+        .pricing-amount span {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--brown-light);
+        }
+
+        .pricing-subtitle {
+            color: var(--brown-light);
+            margin-bottom: var(--space-md);
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin-bottom: var(--space-md);
+        }
+
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--gold-cream);
+        }
+
+        .pricing-feature:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-feature svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--sage);
+            flex-shrink: 0;
+        }
+
+        .pricing-feature span {
+            color: var(--brown-warm);
+        }
+
+        .pricing-breakdown {
+            background: var(--gold-cream);
+            border-radius: 16px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .pricing-breakdown h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--brown-deep);
+            margin-bottom: var(--space-sm);
+        }
+
+        .breakdown-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            text-align: left;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--brown-light);
+        }
+
+        .breakdown-item span:last-child {
+            font-weight: 600;
+            color: var(--brown-warm);
+        }
+
+        /* ============ PARTNERS ============ */
+        .partners {
+            background: var(--cream);
+        }
+
+        .partners-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+        }
+
+        .partner-card {
+            text-align: center;
+            padding: var(--space-md);
+            background: var(--gold-light);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(61, 50, 36, 0.1);
+        }
+
+        .partner-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gold-cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-sm);
+        }
+
+        .partner-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--gold-amber);
+        }
+
+        .partner-card h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--brown-deep);
+            margin-bottom: 0.25rem;
+        }
+
+        .partner-card p {
+            font-size: 0.85rem;
+            color: var(--brown-light);
+        }
+
+        /* ============ CTA ============ */
+        .cta {
+            background: linear-gradient(135deg, var(--gold-warm) 0%, var(--gold-deep) 50%, var(--gold-amber) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 15s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--brown-deep);
+            margin-bottom: var(--space-sm);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            color: var(--brown-warm);
+            margin-bottom: var(--space-md);
+        }
+
+        .cta .btn-primary {
+            background: var(--brown-deep);
+            color: var(--gold-light);
+            font-size: 1.1rem;
+            padding: 1.2rem 2.5rem;
+        }
+
+        .cta .btn-primary:hover {
+            background: var(--brown-dark);
+            box-shadow: 0 10px 40px rgba(42, 35, 26, 0.4);
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--brown-dark);
+            color: rgba(253, 246, 227, 0.7);
+            padding: var(--space-lg) var(--space-md) var(--space-md);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--gold-light);
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-brand p {
+            line-height: 1.6;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-display);
+            color: var(--gold-light);
+            margin-bottom: var(--space-sm);
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(253, 246, 227, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold-warm);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(253, 246, 227, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+        }
+
+        .footer-cause {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(107, 143, 113, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .footer-cause svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--sage);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--gold-light);
+                flex-direction: column;
+                padding: var(--space-md);
+                gap: var(--space-sm);
+                box-shadow: 0 10px 30px rgba(61, 50, 36, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step::after {
+                display: none;
+            }
+
+            .step-number {
+                margin: 0 auto;
+            }
+
+            .breakdown-items {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Fare Flights
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#tickets" class="nav-cta">Get Tickets</a></li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                A GAAPPP Party at New Heights Brewery
+            </div>
+            <h1>World Historic<br><span>Fare Flights</span></h1>
+            <p class="hero-subtitle">The tastefully timely, non-trivial trivia nights benefitting Fort Negley</p>
+            <p class="hero-description">
+                Team-based history trivia meets craft beer flights and locally-sourced small bites. 
+                Learn, eat, drink, and give back—all in one unforgettable evening.
+            </p>
+            <div class="hero-cta">
+                <a href="#tickets" class="btn btn-primary">
+                    Get Tickets — $60
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll to explore</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </div>
+    </section>
+
+    <!-- About / Concept -->
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-content">
+                <div class="section-label">The Concept</div>
+                <h3>More Than Trivia Night</h3>
+                <p>
+                    World Historic Fare Flights isn't your typical pub quiz. It's a carefully crafted experience 
+                    where college-level history presentations meet artisanal cuisine, local craft beer, and 
+                    genuine community impact.
+                </p>
+                <p>
+                    Every event at New Heights Brewery benefits <strong>Fort Negley</strong>, Nashville's historic 
+                    Civil War site, through a partnership with Nashville Parks Foundation.
+                </p>
+                <div class="about-highlight">
+                    <p>"Funlanthropy"—fun + philanthropy. Learn something fascinating, enjoy incredible food and 
+                    beer, and help preserve Nashville history. All at once.</p>
+                </div>
+                <p>
+                    Teams of 2-6 compete through an engaging 75-minute presentation with embedded trivia questions. 
+                    No phones or computers allowed—just good old-fashioned knowledge, teamwork, and a dash of luck 
+                    in the final "Cornucopia Whole" game.
+                </p>
+            </div>
+            <div class="about-visual">
+                <div class="about-card">
+                    <h3 class="gaappp-title">What's a GAAPPP Party?</h3>
+                    <p class="gaappp-full">Great All-American Public Park Perfecting Party</p>
+                    <div class="five-as">
+                        <div class="five-a-item">
+                            <div class="five-a-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                            </div>
+                            <div class="five-a-content">
+                                <h4>Academic</h4>
+                                <p>College-level history presentations by TSU Professor William Harwood</p>
+                            </div>
+                        </div>
+                        <div class="five-a-item">
+                            <div class="five-a-icon">
+                                <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zM12 8v8m-4-4h8"/></svg>
+                            </div>
+                            <div class="five-a-content">
+                                <h4>Alimentary</h4>
+                                <p>Six themed small bites paired with six craft beers</p>
+                            </div>
+                        </div>
+                        <div class="five-a-item">
+                            <div class="five-a-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div class="five-a-content">
+                                <h4>Agricultural</h4>
+                                <p>Locally-sourced ingredients from Nashville-area farmers</p>
+                            </div>
+                        </div>
+                        <div class="five-a-item">
+                            <div class="five-a-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            </div>
+                            <div class="five-a-content">
+                                <h4>Artisanal</h4>
+                                <p>Food truck chefs collaborate with Chef Skylar Bush of Edible Nashville</p>
+                            </div>
+                        </div>
+                        <div class="five-a-item">
+                            <div class="five-a-icon">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                            </div>
+                            <div class="five-a-content">
+                                <h4>Altruistic</h4>
+                                <p>Proceeds benefit Fort Negley through Nashville Parks Foundation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You Get -->
+    <section class="experience" id="experience">
+        <div class="section-header">
+            <div class="section-label">The Experience</div>
+            <h2 class="section-title">What Your Ticket Includes</h2>
+            <p class="section-description">
+                Every $60 ticket delivers a complete evening of learning, eating, drinking, and friendly competition.
+            </p>
+        </div>
+        <div class="experience-grid">
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M6 8h12v9a4 4 0 01-4 4H10a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3M18 1v3"/></svg>
+                </div>
+                <h3>Flight of 6 Beers</h3>
+                <p>Choose your flight from New Heights' craft selection. <span class="experience-highlight">Customized to your taste</span> when you arrive.</p>
+            </div>
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8z"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h3>75-Min Presentation</h3>
+                <p>Engaging history from TSU Professor William Harwood with <span class="experience-highlight">6 embedded trivia questions</span>.</p>
+            </div>
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>Themed Small Bites</h3>
+                <p>Six artisanal bites <span class="experience-highlight">inspired by the era</span> you're learning about. Prepared by local food truck chefs.</p>
+            </div>
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                </div>
+                <h3>Team Game Card</h3>
+                <p>One scorecard per team for answering the six multiple-choice "non-trivial" questions. <span class="experience-highlight">No phones allowed!</span></p>
+            </div>
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 000 4h4v-4h-4z"/></svg>
+                </div>
+                <h3>Prize Packet</h3>
+                <p>Every player takes home a <span class="experience-highlight">GAAPPPP prize packet</span> with swag, coupons, and leftover goodies.</p>
+            </div>
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <h3>Cornucopia Whole</h3>
+                <p>The finale! Toss bean bags for a chance to win the <span class="experience-highlight">Grand Prize Packet</span>. More correct answers = more throws!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="events" id="events">
+        <div class="section-header">
+            <div class="section-label">Mark Your Calendar</div>
+            <h2 class="section-title">Upcoming Fare Flights</h2>
+            <p class="section-description">
+                Each event explores a different era of history with cuisine inspired by that time and place.
+            </p>
+        </div>
+        <div class="events-grid">
+            <div class="event-card">
+                <div class="event-number">#1</div>
+                <div class="event-date">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Monday, January 19th — MLK Jr. Day
+                </div>
+                <h3>So Why Fort Negley?</h3>
+                <div class="event-period">America from 1848 to 1868</div>
+                <p>
+                    Honoring the park that all Fare Flights benefit, this inaugural event explores Nashville and 
+                    American history around Fort Negley's construction—with a special nod to Sarah Estell, the free 
+                    African-American woman who ran her own catering business in antebellum Nashville.
+                </p>
+                <div class="event-details">
+                    <div class="event-detail">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        6:30 PM – 8:00 PM
+                    </div>
+                    <div class="event-detail">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        New Heights Brewery
+                    </div>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-number">#2</div>
+                <div class="event-date">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Monday, February 16th — Presidents' Day
+                </div>
+                <h3>So Why a Republic?</h3>
+                <div class="event-period">America from 1763 to 1776</div>
+                <p>
+                    Celebrating the 250th anniversary of our nation's independence, we journey through the years 
+                    leading up to the Declaration of Independence. Small bites inspired by colonial American cuisine.
+                </p>
+                <div class="event-details">
+                    <div class="event-detail">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        6:30 PM – 8:00 PM
+                    </div>
+                    <div class="event-detail">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        New Heights Brewery
+                    </div>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-number">#3</div>
+                <div class="event-date">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Tuesday, March 17th — St. Patrick's Day
+                </div>
+                <h3>Immigration Nation</h3>
+                <div class="event-period">America from 1789 to 2026</div>
+                <p>
+                    Honoring the United States as overwhelmingly a nation of immigrants, we explore the various 
+                    waves of immigration since the Constitution's ratification. Small bites inspired by the ethnic 
+                    cuisines of each wave.
+                </p>
+                <div class="event-details">
+                    <div class="event-detail">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        6:30 PM – 8:00 PM
+                    </div>
+                    <div class="event-detail">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        New Heights Brewery
+                    </div>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-number">#4</div>
+                <div class="event-date">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Monday, April 14th
+                </div>
+                <h3>13,000 Years of Eating in Middle Tennessee</h3>
+                <div class="event-period">Late Pleistocene to Present</div>
+                <p>
+                    Honoring the local terroir, we journey through 13,000 years of human dining in Middle Tennessee: 
+                    late Pleistocene, Archaic, Mississippian, Columbian Exchange, "Meat and Three," and Contemporary Fusion.
+                </p>
+                <div class="event-details">
+                    <div class="event-detail">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        6:30 PM – 8:00 PM
+                    </div>
+                    <div class="event-detail">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        New Heights Brewery
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header">
+            <div class="section-label">Game Night Flow</div>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-description">
+                From arrival to prizes, here's what your evening looks like.
+            </p>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Arrive & Settle In</h3>
+                    <p>Find your team's table with your game card already waiting. Tell the staff your beer preferences, and they'll customize your flight of six. Your tray of themed small bites arrives shortly after.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Learn & Answer</h3>
+                    <p>Professor William Harwood leads a fascinating 75-minute presentation. Six multiple-choice questions are embedded throughout—mark your answers on your team's game card. No phones or computers allowed!</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Tally the Scores</h3>
+                    <p>Turn in your game cards to the judges' table. The number of correct answers determines how many bean bags your team earns for the final game (plus one "participation" bag just for showing up).</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Play Cornucopia Whole</h3>
+                    <p>Each team tosses their bean bags at a cornhole board with a cornucopia in the hole. Score points: 5 for the cornucopia, 3 for staying on the board, 2 for touching, 1 for floor. Highest total wins the Grand Prize!</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Take Home Your Prizes</h3>
+                    <p>Everyone leaves with a GAAPPPP Prize Packet—swag, coupons, leftover bites, and beer samples. The winning team gets the Grand Packet with the best goodies. Hungry? The food trucks outside are ready for dinner!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="tickets">
+        <div class="section-header">
+            <div class="section-label">Tickets</div>
+            <h2 class="section-title">Join the Next Fare Flight</h2>
+            <p class="section-description">
+                Teams of 2-6 players. Limited to 50 participants per event.
+            </p>
+        </div>
+        <div class="pricing-card">
+            <div class="pricing-badge">All-Inclusive Experience</div>
+            <div class="pricing-amount">$60<span>/person</span></div>
+            <p class="pricing-subtitle">Everything included. No hidden costs.</p>
+            
+            <div class="pricing-features">
+                <div class="pricing-feature">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    <span>Flight of 6 craft beers (customizable)</span>
+                </div>
+                <div class="pricing-feature">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    <span>Tray of 6 historically-themed small bites</span>
+                </div>
+                <div class="pricing-feature">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    <span>75-minute history presentation + trivia</span>
+                </div>
+                <div class="pricing-feature">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    <span>GAAPPPP Prize Packet to take home</span>
+                </div>
+                <div class="pricing-feature">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    <span>Chance to win the Grand Prize</span>
+                </div>
+            </div>
+
+            <div class="pricing-breakdown">
+                <h4>Where Your $60 Goes</h4>
+                <div class="breakdown-items">
+                    <div class="breakdown-item"><span>Food (to chefs)</span><span>$18</span></div>
+                    <div class="breakdown-item"><span>Beer (to New Heights)</span><span>$13</span></div>
+                    <div class="breakdown-item"><span>Production</span><span>$13</span></div>
+                    <div class="breakdown-item"><span>Fort Negley</span><span>$6</span></div>
+                    <div class="breakdown-item"><span>Prizes</span><span>$7</span></div>
+                    <div class="breakdown-item"><span>Edible Nashville</span><span>$3</span></div>
+                </div>
+            </div>
+
+            <a href="https://ediblenashville.com" target="_blank" class="btn btn-primary" style="width: 100%;">
+                Buy Tickets via Edible Nashville
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners">
+        <div class="section-header">
+            <div class="section-label">Our Partners</div>
+            <h2 class="section-title">Made Possible By</h2>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M6 8h12v9a4 4 0 01-4 4H10a4 4 0 01-4-4V8z"/></svg>
+                </div>
+                <h4>New Heights Brewery</h4>
+                <p>Venue & Craft Beer</p>
+            </div>
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h4>Edible Nashville</h4>
+                <p>Chef Skylar Bush & Tickets</p>
+            </div>
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                </div>
+                <h4>Tennessee State University</h4>
+                <p>Prof. William Harwood</p>
+            </div>
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </div>
+                <h4>Fort Negley</h4>
+                <p>Beneficiary Park</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready for a Night of Food, Facts & Funlanthropy?</h2>
+            <p>Join us at New Heights Brewery. Learn something new. Eat something delicious. Help preserve Nashville history.</p>
+            <a href="#tickets" class="btn btn-primary">
+                Get Your Tickets
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>World Historic Fare Flights</h3>
+                <p>
+                    A GAAPPP Party production at New Heights Brewery, Nashville. 
+                    Combining education, local food, craft beer, and community impact 
+                    into one unforgettable evening.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">What's Included</a></li>
+                    <li><a href="#events">Upcoming Events</a></li>
+                    <li><a href="#tickets">Get Tickets</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="https://newheightsbrewing.com" target="_blank">New Heights Brewery</a></li>
+                    <li><a href="https://ediblenashville.com" target="_blank">Edible Nashville</a></li>
+                    <li><a href="https://nashvilleparksfoundation.org" target="_blank">Nashville Parks Foundation</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 World Historic Fare Flights. A GAAPPP Party Production.</p>
+            <div class="footer-cause">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                Proudly benefitting Fort Negley
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile nav toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.experience-card, .event-card, .step, .partner-card, .five-a-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
